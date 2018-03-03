@@ -37,7 +37,7 @@ int getCharNo(char *str){
   return -1;
 }
 
-int mv(int force, char *files[], int filec){
+int mv(int force, char *files[], size_t filec){
   struct stat filemeta, filemeta1;
   int fis[512]; //0 == regular file, 1 == dir 2 == other types
 
@@ -54,7 +54,7 @@ int mv(int force, char *files[], int filec){
 
   for (size_t i = 0; i < filec - 1; i++) {
       link(files[i], files[filec]);
-      
+      unlink(files[i]);
   }
 
   return -1; //should not get to this point
@@ -68,7 +68,7 @@ int main(int argc, char *argv[]){
 
   char *files[512];
   size_t filec = 0, force = 0;
-  for (size_t i = 1; i < argc; i++) {
+  for (int i = 1; i < argc; i++) {
     char *resArgv = NULL;
 
     if (!strncmp(argv[i], "--", 2)) {
@@ -98,7 +98,5 @@ int main(int argc, char *argv[]){
     }
    }
 
-   mv(force,files,filec);
-
-   return 0;
+   return mv(force,files,filec);
 }
