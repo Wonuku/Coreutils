@@ -60,7 +60,7 @@ void rm(char *files[],size_t filec,size_t force){
   struct stat filemeta;
   size_t warning = 0;
   for (size_t i = 0; i < filec; i++){
-    if (!strcmp(files[i],"   IGNORE   ")) {
+    if (!strcmp(files[i],"___IGNORE___")) {
       continue;
     }
     stat(files[i],&filemeta);
@@ -120,7 +120,7 @@ int main(int argc, char *argv[]){
           char *in = NULL;
           scanf("%s\n", in);
           if (!strcmp(in,"YES")) {
-            files[filec] = "   IGNORE   ";
+            files[filec] = "___IGNORE___";
             filec++;
             continue;
           }

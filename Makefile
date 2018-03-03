@@ -1,11 +1,12 @@
-CC = gcc
+CC = clang
 WARN = -Wall -Wextra
 FL = $(WARN) -march=native -pipe
 CFLAGS = $(WARN) $(FL)
 
-binaries=ls rm mv cat
+binaries=src/ls src/rm src/mv src/cat src/yes
 
 all : $(binaries)
+	mv $(binaries) .
 
 clean :
 		rm -f *.o
